@@ -42,8 +42,8 @@ abstract class Styling {
     ),
   };
 
-  static const Color backgroundStartColor = const Color(0xb000bfff);
-  static const Color backgroundFinishColor = const Color(0xb0ff00ee);
+  static const Color backgroundStartColor = const Color(0xb07CA600);
+  static const Color backgroundFinishColor = const Color(0xb07CA600);
   static const Color thinkingColor = const Color(0xa0ffffff);
 
   // **** ANIMATIONS ****

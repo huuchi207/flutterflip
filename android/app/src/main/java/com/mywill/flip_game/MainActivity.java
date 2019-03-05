@@ -1,4 +1,4 @@
-package com.redbrogdon.flutterflip;
+package com.mywill.flip_game;
 
 import android.os.Bundle;
 

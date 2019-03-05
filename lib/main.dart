@@ -7,18 +7,18 @@ import 'dart:async';
 import 'package:async/async.dart';
 import 'package:flutter/services.dart' show SystemChrome, DeviceOrientation;
 import 'package:flutter/widgets.dart';
-
-import 'game_board.dart';
-import 'game_model.dart';
-import 'maybe_builder.dart';
-import 'move_finder.dart';
-import 'styling.dart';
-import 'thinking_indicator.dart';
-
+import 'package:flutter/material.dart';
+import 'package:BasicReversiGame/game_board.dart';
+import 'package:BasicReversiGame/game_model.dart';
+import 'package:BasicReversiGame/maybe_builder.dart';
+import 'package:BasicReversiGame/move_finder.dart';
+import 'package:BasicReversiGame/styling.dart';
+import 'package:BasicReversiGame/thinking_indicator.dart';
+import 'package:BasicReversiGame/purchase_screen.dart';
+import 'package:BasicReversiGame/setting_screen.dart';
 /// Main function for the app. Turns off the system overlays and locks portrait
 /// orientation for a more game-like UI, and then runs the [Widget] tree.
 void main() {
-  SystemChrome.setEnabledSystemUIOverlays([]);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -39,6 +39,7 @@ class FlutterFlipApp extends StatelessWidget {
           pageBuilder: (context, animation, secondaryAnimation) => GameScreen(),
         );
       },
+        debugShowCheckedModeBanner :false
     );
   }
 }
@@ -114,15 +115,56 @@ class _GameScreenState extends State<GameScreen> {
   /// details to _buildWidgets.
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: _modelStream,
-      builder: (context, snapshot) {
-        return _buildWidgets(
-          context,
-          snapshot.hasData ? snapshot.data : GameModel(board: GameBoard()),
-        );
-      },
-    );
+  return MaterialApp(
+    title: "Basic",
+    theme: ThemeData.light(),
+    home: Scaffold(
+      backgroundColor: Color(0xb07CA600),
+      appBar: AppBar(
+        title: Text("Basic Reversi Game"),
+        elevation: 0.0,
+        backgroundColor: Color(0xb07CA600),
+        actions: <Widget>[
+          InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.settings_applications,
+                color: Colors.white,
+              ),
+            ),
+            splashColor: Colors.white,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingScreen()),
+              );
+            },
+          )
+        ],
+      ),
+      body: StreamBuilder(
+        stream: _modelStream,
+        builder: (context, snapshot) {
+          return _buildWidgets(
+            context,
+            snapshot.hasData ? snapshot.data : GameModel(board: GameBoard()),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.shopping_cart),
+          backgroundColor: Colors.red,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PurchaseScreen()),
+            );
+          }
+      ),
+    ),
+    debugShowCheckedModeBanner: false,
+  );
   }
 
   // Called when the user taps on the game's board display. If it's the player's
