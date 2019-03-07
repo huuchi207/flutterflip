@@ -129,6 +129,22 @@ class _GameScreenState extends State<GameScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
+                Icons.shopping_cart,
+                color: Colors.white,
+              ),
+            ),
+            splashColor: Colors.white,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PurchaseScreen()),
+              );
+            },
+          ),
+          InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
                 Icons.settings_applications,
                 color: Colors.white,
               ),
@@ -140,7 +156,8 @@ class _GameScreenState extends State<GameScreen> {
                 MaterialPageRoute(builder: (context) => SettingScreen()),
               );
             },
-          )
+          ),
+
         ],
       ),
       body: StreamBuilder(
@@ -152,16 +169,17 @@ class _GameScreenState extends State<GameScreen> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.shopping_cart),
-          backgroundColor: Colors.red,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PurchaseScreen()),
-            );
-          }
-      ),
+//      floatingActionButton: FloatingActionButton(
+//          mini: true,
+//          child: Icon(Icons.),
+//          backgroundColor: Colors.red,
+//          onPressed: () {
+//            Navigator.push(
+//              context,
+//              MaterialPageRoute(builder: (context) => PurchaseScreen()),
+//            );
+//          }
+//      ),
     ),
     debugShowCheckedModeBanner: false,
   );
@@ -180,7 +198,7 @@ class _GameScreenState extends State<GameScreen> {
   // Builds out the Widget tree using the most recent GameModel from the stream.
   Widget _buildWidgets(BuildContext context, GameModel model) {
     return Container(
-      padding: EdgeInsets.only(top: 30.0, left: 15.0, right: 15.0),
+      padding: EdgeInsets.only(top: 30.0, left: 5.0, right: 5.0),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
