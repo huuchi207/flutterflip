@@ -116,7 +116,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
   return MaterialApp(
-    title: "Basic",
+    title: "Basic Reversi Game",
     theme: ThemeData.light(),
     home: Scaffold(
       backgroundColor: Color(0xb07CA600),
